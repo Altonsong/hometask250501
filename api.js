@@ -83,18 +83,31 @@ function deleteTaskFromSupabase(taskId, callback) {
 // ✅ 更新任务状态
 function updateTaskStatus(taskId, newStatus, callback) {
   var xhr = new XMLHttpRequest();
-  var url = SUPABASE_URL + "/rest/v1/tasks?id=eq." + encodeURIComponent(taskId);
+  var url = SUPABASE_URL + "/rest/v1/tasks";
+  url += "?id=eq." + encodeURIComponent(taskId);
   xhr.open("PATCH", url, true);
   xhr.setRequestHeader("apikey", API_KEY);
+  xhr.setRequestHeader("Authorization", "Bearer " + API_KEY);
   xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.setRequestHeader("Prefer", "return=representation");
-  xhr.onload = function () {
-    if (xhr.status === 200 || xhr.status === 204) {
-      if (callback) callback(true);
-    } else {
-      alert("Update status failed. Status: " + xhr.status);
-      if (callback) callback(false);
+  xhr.setRequestHeader("Prefer", "return=minimal");
+  
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 204) {
+        if (callback) callback(true);
+      } else {
+        console.error("Update failed:", xhr.status, xhr.responseText);
+        alert("更新状态失败，请重试");
+        if (callback) callback(false);
+      }
     }
   };
+  
+  xhr.onerror = function() {
+    console.error("Network error occurred");
+    alert("网络错误，请检查网络连接");
+    if (callback) callback(false);
+  };
+
   xhr.send(JSON.stringify({ status: newStatus }));
 }

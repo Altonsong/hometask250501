@@ -40,7 +40,8 @@ function addTask(task, callback) {
 // ✅ 登录验证码检查
 function checkPasscode(code, callback) {
   var xhr = new XMLHttpRequest();
-  var url = SUPABASE_URL + "/rest/v1/passcode?code=eq." + encodeURIComponent(code);
+  // 统一转换为字符串进行比较
+  var url = SUPABASE_URL + "/rest/v1/passcode?code=eq." + encodeURIComponent(code.toString());
   xhr.open("GET", url, true);
   xhr.setRequestHeader("apikey", API_KEY);
   xhr.setRequestHeader("Content-Type", "application/json");

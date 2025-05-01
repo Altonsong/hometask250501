@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Add Task</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <div class="nav">
+    <a href="index.html">Home</a>
+    <a href="login.html">Add Task</a>
+  </div>
+
+  <h1>Add Task</h1>
+
+  <!-- 添加任务表单 -->
+  <form onsubmit="submitTask(); return false;">
+    <input id="name" type="text" placeholder="Task name" required><br>
+
+    <select id="owner" required>
+      <option value="">Select Owner</option>
+      <option value="snake">Snake</option>
+      <option value="sheep">Sheep</option>
+      <option value="together">Together</option>
+    </select><br>
+
+    <input id="due_date" type="datetime-local" required><br>
+
+    <button type="submit">Add</button>
+  </form>
+
+  <!-- JS API 调用 -->
+  <script src="api.js"></script>
+  <script>
+    // 登录验证（无登录则跳转）
+    if (localStorage.getItem("loggedIn") !== "yes") {
+      window.location.href = "login.html";
+    }
+
+    // 提交任务
+    function submitTask() {
+      var task = {
+        name: document.getElementById("name").value,
+        owner: document.getElementById("owner").value,
+        due_date: document.getElementById("due_date").value,
+        status: "pending"
+      };
+
+      addTask(task, function(success) {
+        if (success) {
+          alert("Task added!");
+          window.location.href = "index.html";
+        } else {
+          alert("Failed to add task.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

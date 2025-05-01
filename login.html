@@ -58,7 +58,9 @@
       updatePinDots();
 
       if (code.length === 4) {
+        console.log("Checking code:", code);
         checkPasscode(code, function(valid) {
+          console.log("Validation result:", valid);
           if (valid) {
             localStorage.setItem("loggedIn", "yes");
             window.location.href = "add_task.html";

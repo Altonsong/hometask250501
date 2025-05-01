@@ -1,38 +1,10 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Login</title>
+  <title>Login - Home Task</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .dial-pad {
-      display: table;
-      margin-top: 20px;
-    }
-    .dial-row {
-      display: table-row;
-    }
-    .dial-button {
-      display: table-cell;
-      width: 60px;
-      height: 60px;
-      font-size: 24px;
-      text-align: center;
-      vertical-align: middle;
-      border: 1px solid #ccc;
-      background-color: #444;
-      color: white;
-      cursor: pointer;
-    }
-    .dial-button:active {
-      background-color: #666;
-    }
-    #entered {
-      font-size: 18px;
-      letter-spacing: 8px;
-      margin-top: 10px;
-    }
-  </style>
 </head>
 <body>
   <div class="nav">
@@ -40,24 +12,39 @@
     <a href="login.html">Add Task</a>
   </div>
 
-  <h1>Login</h1>
-  <div id="entered">____</div>
+  <div class="login-container">
+    <h1>Home Task</h1>
+    <p class="login-desc">Please enter a 4-digit passcode.</p>
+    <p class="login-subdesc">You need to verify before you can add a task.</p>
+    
+    <div class="pin-dots">
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+    </div>
 
-  <div class="dial-pad">
-    <div class="dial-row">
-      <div class="dial-button" onclick="press('1')">1</div>
-      <div class="dial-button" onclick="press('2')">2</div>
-      <div class="dial-button" onclick="press('3')">3</div>
-    </div>
-    <div class="dial-row">
-      <div class="dial-button" onclick="press('4')">4</div>
-      <div class="dial-button" onclick="press('5')">5</div>
-      <div class="dial-button" onclick="press('6')">6</div>
-    </div>
-    <div class="dial-row">
-      <div class="dial-button" onclick="press('7')">7</div>
-      <div class="dial-button" onclick="press('8')">8</div>
-      <div class="dial-button" onclick="press('9')">9</div>
+    <div class="dial-pad">
+      <div class="dial-row">
+        <div class="dial-button" onclick="press('1')">1</div>
+        <div class="dial-button" onclick="press('2')">2</div>
+        <div class="dial-button" onclick="press('3')">3</div>
+      </div>
+      <div class="dial-row">
+        <div class="dial-button" onclick="press('4')">4</div>
+        <div class="dial-button" onclick="press('5')">5</div>
+        <div class="dial-button" onclick="press('6')">6</div>
+      </div>
+      <div class="dial-row">
+        <div class="dial-button" onclick="press('7')">7</div>
+        <div class="dial-button" onclick="press('8')">8</div>
+        <div class="dial-button" onclick="press('9')">9</div>
+      </div>
+      <div class="dial-row">
+        <div class="dial-button" onclick="clearCode()">C</div>
+        <div class="dial-button" onclick="press('0')">0</div>
+        <div class="dial-button" onclick="clearLastDigit()">×</div>
+      </div>
     </div>
   </div>
 
@@ -68,12 +55,8 @@
     function press(digit) {
       if (code.length >= 4) return;
       code += digit;
+      updatePinDots();
 
-      // 显示输入进度
-      var display = code + "____".substring(code.length);
-      document.getElementById("entered").innerHTML = display;
-
-      // 自动验证
       if (code.length === 4) {
         checkPasscode(code, function(valid) {
           if (valid) {
@@ -81,11 +64,27 @@
             window.location.href = "add_task.html";
           } else {
             alert("Wrong code");
-            code = "";
-            document.getElementById("entered").innerHTML = "____";
+            clearCode();
           }
         });
       }
+    }
+
+    function clearCode() {
+      code = "";
+      updatePinDots();
+    }
+
+    function clearLastDigit() {
+      code = code.slice(0, -1);
+      updatePinDots();
+    }
+
+    function updatePinDots() {
+      const dots = document.querySelectorAll('.pin-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('filled', index < code.length);
+      });
     }
   </script>
 </body>

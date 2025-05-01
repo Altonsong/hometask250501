@@ -58,6 +58,11 @@ h1 {
   padding: 15px 0;
 }
 
+.task img {
+  height: 40px;
+  width: auto;
+}
+
 /* 任务名与日期 */
 .task-name {
   font-size: 18px;

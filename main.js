@@ -37,7 +37,7 @@ function getStatusColor(status) {
 // ✅ 点击切换状态并更新 Supabase
 function toggleStatus(btn) {
   var status = btn.getAttribute("data-status");
-  var nextStatus = status === "pending" ? "done" : (status === "done" ? "redo" : "done");
+  var nextStatus = status === "pending" ? "completed" : (status === "completed" ? "rework" : "pending");
   var taskId = btn.getAttribute("data-id");
 
   // 更新按钮外观

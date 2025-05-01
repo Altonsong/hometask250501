@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,50 +7,72 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 顶部导航 -->
-  <div class="nav">
-    <a href="index.html">Home</a>
-    <a href="login.html">Add Task</a>
+  <div class="container">
+    <h1>Add Task</h1>
+
+    <form onsubmit="submitTask(); return false;" class="add-task-form">
+      <div class="form-group">
+        <label>Task Name</label>
+        <input 
+          id="name" 
+          type="text" 
+          placeholder="Add Task Name (10-40 characters)" 
+          required
+          minlength="10"
+          maxlength="40"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Owner</label>
+        <div class="select-wrapper">
+          <select id="owner" required>
+            <option value="snake">Snake</option>
+            <option value="sheep">Sheep</option>
+            <option value="together">Together</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="date-time-group">
+        <div class="form-group">
+          <label>Finish Date</label>
+          <input id="finish_date" type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label>Finish Time</label>
+          <input id="finish_time" type="time" required>
+        </div>
+      </div>
+
+      <button type="submit" class="add-task-btn">
+        <span class="plus-icon">+</span>
+        Add Task
+      </button>
+    </form>
   </div>
 
-  <h1>Add Task</h1>
-
-  <!-- 添加任务表单 -->
-  <form onsubmit="submitTask(); return false;">
-    <input id="name" type="text" placeholder="Task name" required><br>
-
-    <select id="owner" required>
-      <option value="">Select Owner</option>
-      <option value="snake">Snake</option>
-      <option value="sheep">Sheep</option>
-      <option value="together">Together</option>
-    </select><br>
-
-    <input id="due_date" type="datetime-local" required><br>
-
-    <button type="submit">Add</button>
-  </form>
-
-  <!-- JS API 调用 -->
   <script src="api.js"></script>
   <script>
-    // 登录验证（无登录则跳转）
     if (localStorage.getItem("loggedIn") !== "yes") {
       window.location.href = "login.html";
     }
 
-    // 提交任务
     function submitTask() {
+      var dateInput = document.getElementById("finish_date").value;
+      var timeInput = document.getElementById("finish_time").value;
+      var due_date = new Date(dateInput + 'T' + timeInput);
+
       var task = {
         name: document.getElementById("name").value,
         owner: document.getElementById("owner").value,
-        due_date: document.getElementById("due_date").value,
+        due_date: due_date.toISOString(),
         status: "pending"
       };
 
       addTask(task, function(success) {
         if (success) {
-          alert("Task added!");
           window.location.href = "index.html";
         } else {
           alert("Failed to add task.");

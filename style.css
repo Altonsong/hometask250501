@@ -39,13 +39,24 @@ h1 {
 
 /* 顶部导航栏 */
 .nav {
-  margin-bottom: 20px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
-.nav a {
-  margin-right: 10px;
-  color: lightblue;
+.nav-icon {
+  color: white;
   text-decoration: none;
-  font-weight: bold;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* 首页 task 项布局 */

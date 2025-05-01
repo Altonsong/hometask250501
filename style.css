@@ -21,7 +21,7 @@ h1 {
 .connection-status {
   background: rgba(0, 255, 0, 0.1);
   color: #00FF00;
-  padding: 15px;
+  padding: 5px;
   border-radius: 8px;
   margin-bottom: 30px;
   display: flex;
@@ -73,8 +73,8 @@ h1 {
 
 /* 任务名与日期 */
 .task-name {
-  font-size: 18px;
-  color: white;
+  font-size: 28px;
+  color: yellow;
   margin-bottom: 5px;
 }
 .task-date {

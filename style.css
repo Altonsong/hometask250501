@@ -46,17 +46,14 @@ h1 {
 .nav-icon {
   color: white;
   text-decoration: none;
-  font-size: 24px;
-  background: rgba(255, 255, 255, 0.1);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  font-size: 20px;
+  opacity: 0.5;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .nav-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
+  opacity: 1;
 }
 
 /* 首页 task 项布局 */

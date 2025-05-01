@@ -4,28 +4,88 @@
   <meta charset="utf-8">
   <title>Login</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .dial-pad {
+      display: table;
+      margin-top: 20px;
+    }
+    .dial-row {
+      display: table-row;
+    }
+    .dial-button {
+      display: table-cell;
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #ccc;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+    }
+    .dial-button:active {
+      background-color: #666;
+    }
+    #entered {
+      font-size: 18px;
+      letter-spacing: 8px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <div class="nav">
     <a href="index.html">Home</a>
     <a href="login.html">Add Task</a>
   </div>
+
   <h1>Login</h1>
-  <input type="text" id="passcode" placeholder="Enter Passcode">
-  <button onclick="checkCode()">Submit</button>
+  <div id="entered">____</div>
+
+  <div class="dial-pad">
+    <div class="dial-row">
+      <div class="dial-button" onclick="press('1')">1</div>
+      <div class="dial-button" onclick="press('2')">2</div>
+      <div class="dial-button" onclick="press('3')">3</div>
+    </div>
+    <div class="dial-row">
+      <div class="dial-button" onclick="press('4')">4</div>
+      <div class="dial-button" onclick="press('5')">5</div>
+      <div class="dial-button" onclick="press('6')">6</div>
+    </div>
+    <div class="dial-row">
+      <div class="dial-button" onclick="press('7')">7</div>
+      <div class="dial-button" onclick="press('8')">8</div>
+      <div class="dial-button" onclick="press('9')">9</div>
+    </div>
+  </div>
 
   <script src="api.js"></script>
   <script>
-    function checkCode() {
-      var code = document.getElementById("passcode").value;
-      checkPasscode(code, function(valid) {
-        if (valid) {
-          localStorage.setItem("loggedIn", "yes");
-          window.location.href = "add_task.html";
-        } else {
-          alert("Wrong code");
-        }
-      });
+    var code = "";
+
+    function press(digit) {
+      if (code.length >= 4) return;
+      code += digit;
+
+      // 显示输入进度
+      var display = code + "____".substring(code.length);
+      document.getElementById("entered").innerHTML = display;
+
+      // 自动验证
+      if (code.length === 4) {
+        checkPasscode(code, function(valid) {
+          if (valid) {
+            localStorage.setItem("loggedIn", "yes");
+            window.location.href = "add_task.html";
+          } else {
+            alert("Wrong code");
+            code = "";
+            document.getElementById("entered").innerHTML = "____";
+          }
+        });
+      }
     }
   </script>
 </body>

@@ -43,7 +43,7 @@ function checkPasscode(code, callback) {
   // 确保code是字符串类型
   code = code.toString();
   console.log("Sending request with code:", code);
-  var url = SUPABASE_URL + "/rest/v1/passcode?select=*&code=eq." + code;
+  var url = SUPABASE_URL + "/rest/v1/passcode?code=eq." + code + "&select=*";
   console.log("Request URL:", url);
   xhr.open("GET", url, true);
   xhr.setRequestHeader("apikey", API_KEY);
@@ -51,6 +51,7 @@ function checkPasscode(code, callback) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       var data = JSON.parse(xhr.responseText);
+      console.log("Server response:", data);
       if (callback) callback(data.length > 0);
     } else {
       alert("Login check failed. Status: " + xhr.status);

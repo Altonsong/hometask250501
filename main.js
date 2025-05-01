@@ -22,15 +22,15 @@ window.onload = function () {
 
 // ✅ 获取状态图标
 function getStatusSymbol(status) {
-  if (status === "done") return "✔";
-  if (status === "redo") return "↻";
+  if (status === "completed") return "✔";
+  if (status === "rework") return "↻";
   return "⭘"; // pending
 }
 
 // ✅ 获取状态颜色
 function getStatusColor(status) {
-  if (status === "done") return "green";
-  if (status === "redo") return "yellow";
+  if (status === "completed") return "green";
+  if (status === "rework") return "yellow";
   return "gray"; // pending
 }
 

@@ -90,7 +90,7 @@ function updateTaskStatus(taskId, newStatus, callback) {
   xhr.setRequestHeader("Authorization", "Bearer " + API_KEY);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Prefer", "return=minimal");
-  
+
   xhr.onreadystatechange = function() {
     if (xhr.readyState === 4) {
       if (xhr.status === 204) {
@@ -102,7 +102,7 @@ function updateTaskStatus(taskId, newStatus, callback) {
       }
     }
   };
-  
+
   xhr.onerror = function() {
     console.error("Network error occurred");
     alert("网络错误，请检查网络连接");

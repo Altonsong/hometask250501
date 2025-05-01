@@ -70,7 +70,7 @@ function deleteTaskFromSupabase(taskId, callback) {
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.setRequestHeader("Prefer", "return=representation");
   xhr.onload = function () {
-    if (xhr.status === 204) {
+    if (xhr.status === 204 || xhr.status === 200) {
       if (callback) callback(true);
     } else {
       alert("Delete task failed. Status: " + xhr.status);

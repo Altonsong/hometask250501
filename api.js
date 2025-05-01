@@ -41,7 +41,7 @@ function addTask(task, callback) {
 function checkPasscode(code, callback) {
   var xhr = new XMLHttpRequest();
   // 统一转换为字符串进行比较
-  var url = SUPABASE_URL + "/rest/v1/passcode?code=eq." + encodeURIComponent(code.toString());
+  var url = SUPABASE_URL + "/rest/v1/passcode?code=eq." + encodeURIComponent(code);
   xhr.open("GET", url, true);
   xhr.setRequestHeader("apikey", API_KEY);
   xhr.setRequestHeader("Content-Type", "application/json");

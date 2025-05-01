@@ -148,24 +148,68 @@ h1 {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.select-wrapper {
+.custom-select {
   position: relative;
+  user-select: none;
 }
 
-.select-wrapper select {
-  width: 100%;
-  appearance: none;
-  padding-right: 30px;
+.select-trigger {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
-.select-wrapper::after {
-  content: "▼";
+.select-trigger:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.select-trigger .arrow {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.select-options {
   position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  pointer-events: none;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border-radius: 8px;
+  margin-top: 4px;
+  padding: 4px;
+  display: none;
+  z-index: 100;
+}
+
+.select-options.show {
+  display: block;
+}
+
+.option {
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.option .check {
+  margin-left: auto;
+  color: #4CAF50;
+}
+
+.together-icons {
+  display: flex;
+  gap: 2px;
 }
 
 .date-time-group {

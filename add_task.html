@@ -28,13 +28,34 @@
 
       <div class="form-group">
         <label>Owner</label>
-        <div class="select-wrapper">
-          <select id="owner" required>
-            <option value="snake">Snake</option>
-            <option value="sheep">Sheep</option>
-            <option value="together">Together</option>
-          </select>
+        <div class="custom-select">
+          <div class="select-trigger" onclick="toggleSelect()">
+            <img src="images/snake.png" id="selected-icon" width="20">
+            <span id="selected-text">Snake</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="select-options" id="select-options">
+            <div class="option" onclick="selectOption('snake', this)">
+              <img src="images/snake.png" width="20">
+              <span>Snake</span>
+              <span class="check">✓</span>
+            </div>
+            <div class="option" onclick="selectOption('sheep', this)">
+              <img src="images/sheep.png" width="20">
+              <span>Sheep</span>
+              <span class="check"></span>
+            </div>
+            <div class="option" onclick="selectOption('together', this)">
+              <div class="together-icons">
+                <img src="images/snake.png" width="20">
+                <img src="images/sheep.png" width="20">
+              </div>
+              <span>Together</span>
+              <span class="check"></span>
+            </div>
+          </div>
         </div>
+        <input type="hidden" id="owner" required value="snake">
       </div>
 
       <div class="date-time-group">
@@ -61,6 +82,48 @@
     if (localStorage.getItem("loggedIn") !== "yes") {
       window.location.href = "login.html";
     }
+    
+    function toggleSelect() {
+      document.getElementById('select-options').classList.toggle('show');
+    }
+
+    function selectOption(value, element) {
+      // 更新隐藏输入
+      document.getElementById('owner').value = value;
+      
+      // 更新显示文本和图标
+      document.getElementById('selected-text').textContent = element.querySelector('span').textContent;
+      if (value === 'together') {
+        const icons = element.querySelector('.together-icons').cloneNode(true);
+        document.getElementById('selected-icon').replaceWith(icons);
+      } else {
+        const img = document.createElement('img');
+        img.src = `images/${value}.png`;
+        img.width = 20;
+        img.id = 'selected-icon';
+        const oldIcon = document.getElementById('selected-icon');
+        if (oldIcon.tagName === 'IMG') {
+          oldIcon.replaceWith(img);
+        } else {
+          oldIcon.parentNode.replaceWith(img);
+        }
+      }
+      
+      // 更新选中状态
+      document.querySelectorAll('.option .check').forEach(check => check.textContent = '');
+      element.querySelector('.check').textContent = '✓';
+      
+      // 关闭下拉框
+      document.getElementById('select-options').classList.remove('show');
+    }
+
+    // 点击外部关闭下拉框
+    document.addEventListener('click', function(e) {
+      const select = document.querySelector('.custom-select');
+      if (!select.contains(e.target)) {
+        document.getElementById('select-options').classList.remove('show');
+      }
+    });
 
     function submitTask() {
       var dateInput = document.getElementById("finish_date").value;

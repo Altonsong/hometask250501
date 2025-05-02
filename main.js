@@ -20,19 +20,7 @@ window.onload = function () {
   });
 };
 
-// ✅ 获取状态图标
-function getStatusSymbol(status) {
-  if (status === "completed") return "✔";
-  if (status === "rework") return "↻";
-  return "⭘"; // pending
-}
 
-// ✅ 获取状态颜色
-function getStatusColor(status) {
-  if (status === "completed") return "green";
-  if (status === "rework") return "yellow";
-  return "gray"; // pending
-}
 
 // ✅ 点击切换状态并更新 Supabase
 function toggleStatus(btn) {
@@ -42,8 +30,7 @@ function toggleStatus(btn) {
 
   // 更新按钮外观
   btn.setAttribute("data-status", nextStatus);
-  btn.innerHTML = getStatusSymbol(nextStatus);
-  btn.style.backgroundColor = getStatusColor(nextStatus);
+  btn.innerHTML = `<img src="images/${nextStatus}.png" width="60" height="60">`;
 
   // 更新数据库
   updateTaskStatus(taskId, nextStatus, function(success) {

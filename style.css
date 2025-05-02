@@ -59,7 +59,7 @@ h1 {
 /* 首页 task 项布局 */
 .task {
   display: grid;
-  grid-template-columns: 1fr 170px 130px;
+  grid-template-columns: 1fr 60px 170px;
   gap: 20px;
   align-items: center;
   margin-bottom: 20px;
@@ -318,4 +318,10 @@ select:focus {
 
 .dial-button:active {
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.owner-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

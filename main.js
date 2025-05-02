@@ -20,8 +20,6 @@ window.onload = function () {
   });
 };
 
-
-
 // ✅ 点击切换状态并更新 Supabase
 function toggleStatus(btn) {
   var status = btn.getAttribute("data-status");

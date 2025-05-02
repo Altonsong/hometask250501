@@ -59,12 +59,12 @@ h1 {
 /* 首页 task 项布局 */
 .task {
   display: grid;
-  grid-template-columns: 1fr 60px 170px;
+  grid-template-columns: 1fr 170px 130px;
   gap: 20px;
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 15px 0;
+  padding: 10px 0;
 }
 
 .task img {
@@ -74,18 +74,18 @@ h1 {
 
 .task-buttons {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 /* 任务名与日期 */
 .task-name {
-  font-size: 36px;
+  font-size: 38px;
   color: yellow;
   font-weight: bold;
   margin-bottom: 5px;
 }
 .task-date {
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
 }
 

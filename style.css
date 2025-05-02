@@ -60,7 +60,7 @@ h1 {
 /* 首页 task 项布局 */
 .task {
   display: grid;
-  grid-template-columns: 1fr 160px 170px;
+  grid-template-columns: 1fr 160px 140px;
   gap: 20px;
   align-items: center;
   margin-bottom: 20px;
@@ -258,19 +258,22 @@ select:focus {
 
 .login-desc {
   color: #ccc;
+  font-size: 26px;
   margin: 20px 0 5px;
 }
 
 .login-subdesc {
   color: #666;
+  font-size: 24px;
   margin: 0 0 30px;
-  font-size: 0.9em;
 }
 
 .pin-dots {
   display: flex;
   justify-content: center;
   gap: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin: 30px 0;
 }
 

@@ -251,30 +251,31 @@ select:focus {
 
 /* Login page styles */
 .login-container {
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 100%;
+  margin: 20px auto;
   text-align: center;
+  padding: 0 10px;
 }
 
 .login-desc {
   color: #ccc;
-  font-size: 26px;
-  margin: 20px 0 5px;
+  font-size: clamp(20px, 5vw, 26px);
+  margin: 15px 0 5px;
 }
 
 .login-subdesc {
   color: #666;
-  font-size: 24px;
-  margin: 0 0 30px;
+  font-size: clamp(18px, 4vw, 24px);
+  margin: 0 0 20px;
 }
 
 .pin-dots {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin: 30px 0;
+  gap: clamp(15px, 4vw, 20px);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 20px 0;
 }
 
 .pin-dot {
@@ -290,21 +291,22 @@ select:focus {
 
 .dial-pad {
   display: grid;
-  gap: 30px;
-  max-width: 420px;
+  gap: clamp(15px, 4vw, 30px);
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .dial-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: clamp(15px, 4vw, 30px);
 }
 
 .dial-button {
-  width: 100px;
-  height: 100px;
-  font-size: 36px;
+  width: clamp(80px, 25vw, 120px);
+  height: clamp(80px, 25vw, 120px);
+  font-size: clamp(24px, 8vw, 42px);
   border-radius: 50%;
   border: none;
   background-color: rgba(255, 255, 255, 0.1);

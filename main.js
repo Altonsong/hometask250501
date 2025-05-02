@@ -12,8 +12,8 @@ window.onload = function () {
       html += "<div class='task-date'>" + formatDate(t.due_date) + "</div></div>";
       html += "<div><img src='images/" + t.owner + ".png' width='40'></div>";
       html += "<div>";
-      html += "<button onclick='toggleStatus(this)' class='status' style='background-color:" + statusColor + "' data-status='" + t.status + "' data-id='" + t.id + "'>" + statusSymbol + "</button> ";
-      html += "<button onclick='deleteTask(this)' class='delete-btn' data-id='" + t.id + "'>❌</button>";
+      html += "<button onclick='toggleStatus(this)' class='status' data-status='" + t.status + "' data-id='" + t.id + "'><img src='images/" + t.status + ".png' width='60' height='60'></button> ";
+      html += "<button onclick='deleteTask(this)' class='delete-btn' data-id='" + t.id + "'><img src='images/delete.png' width='60' height='60'></button>";
       html += "</div></div>";
     }
     document.getElementById("taskList").innerHTML = html;

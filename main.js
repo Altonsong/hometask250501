@@ -4,15 +4,12 @@ window.onload = function () {
     for (var i = 0; i < tasks.length; i++) {
       var t = tasks[i];
 
-      var statusSymbol = getStatusSymbol(t.status);
-      var statusColor = getStatusColor(t.status);
-
       html += "<div class='task'>";
       html += "<div><div class='task-name'>" + t.name + "</div>";
       html += "<div class='task-date'>" + formatDate(t.due_date) + "</div></div>";
       html += "<div><img src='images/" + t.owner + ".png' width='40'></div>";
-      html += "<div>";
-      html += "<button onclick='toggleStatus(this)' class='status' data-status='" + t.status + "' data-id='" + t.id + "'><img src='images/" + t.status + ".png' width='60' height='60'></button> ";
+      html += "<div class='task-buttons'>";
+      html += "<button onclick='toggleStatus(this)' class='status' data-status='" + t.status + "' data-id='" + t.id + "'><img src='images/" + t.status + ".png' width='60' height='60'></button>";
       html += "<button onclick='deleteTask(this)' class='delete-btn' data-id='" + t.id + "'><img src='images/delete.png' width='60' height='60'></button>";
       html += "</div></div>";
     }

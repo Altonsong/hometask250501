@@ -58,8 +58,9 @@ h1 {
 
 /* 首页 task 项布局 */
 .task {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 60px 170px;
+  gap: 50px;
   align-items: center;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -69,6 +70,11 @@ h1 {
 .task img {
   height: 60px;
   width: auto;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 /* 任务名与日期 */

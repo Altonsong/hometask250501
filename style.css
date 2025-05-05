@@ -90,6 +90,16 @@ h1 {
   font-weight: bold;
   margin-bottom: 5px;
 }
+
+.task-name.completed {
+  color: #666;
+  text-decoration: line-through;
+}
+
+.task-name.rework {
+  color: yellow;
+  text-decoration: none;
+}
 .task-date {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);

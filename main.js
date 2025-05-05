@@ -10,7 +10,7 @@ window.onload = function () {
       var t = tasks[i];
 
       html += "<div class='task'>";
-      html += "<div><div class='task-name'>" + t.name + "</div>";
+      html += "<div><div class='task-name " + t.status + "'>" + t.name + "</div>";
       html += "<div class='task-date'>" + formatDate(t.due_date) + "</div></div>";
       html += "<div class='owner-icon'><img src='images/" + t.owner + ".png' width='40'></div>";
       html += "<div class='task-buttons'>";

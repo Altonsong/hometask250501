@@ -1,5 +1,10 @@
 window.onload = function () {
   getTasks(function (tasks) {
+    // 按完成时间升序排序
+    tasks.sort(function(a, b) {
+      return new Date(a.due_date) - new Date(b.due_date);
+    });
+    
     var html = "";
     for (var i = 0; i < tasks.length; i++) {
       var t = tasks[i];

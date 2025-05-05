@@ -29,10 +29,11 @@ function toggleStatus(btn) {
   var taskId = btn.getAttribute("data-id");
 
   // 更新按钮外观和任务名称样式
+  const oldStatus = status || 'pending';
   btn.setAttribute("data-status", nextStatus);
   btn.innerHTML = `<img src="images/${nextStatus}.png" width="60" height="60">`;
   var taskNameElement = btn.closest('.task').querySelector('.task-name');
-  taskNameElement.className = 'task-name ' + nextStatus;
+  taskNameElement.classList.replace(oldStatus, nextStatus);
 
   // 更新数据库
   updateTaskStatus(taskId, nextStatus, function(success) {

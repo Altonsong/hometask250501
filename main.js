@@ -14,7 +14,7 @@ window.onload = function () {
       html += "<div class='task-date'>" + formatDate(t.due_date) + "</div></div>";
       html += "<div class='owner-icon'><img src='images/" + t.owner + ".png' width='40'></div>";
       html += "<div class='task-buttons'>";
-      html += "<button onclick='toggleStatus(this)' class='status' data-status='" + t.status + "' data-id='" + t.id + "'><img src='images/" + t.status + ".png' width='60' height='60'></button>";
+      html += "<button onclick='toggleStatus(this)' class='status' data-status='" + (t.status || 'pending') + "' data-id='" + t.id + "'><img src='images/" + (t.status || 'pending') + ".png' width='60' height='60'></button>";
       html += "<button onclick='deleteTask(this)' class='delete-btn' data-id='" + t.id + "'><img src='images/delete.png' width='60' height='60'></button>";
       html += "</div></div>";
     }
@@ -29,11 +29,11 @@ function toggleStatus(btn) {
   var taskId = btn.getAttribute("data-id");
 
   // 更新按钮外观和任务名称样式
-  const oldStatus = status || 'pending';
-  btn.setAttribute("data-status", nextStatus);
+  btn.dataset.status = nextStatus;
   btn.innerHTML = `<img src="images/${nextStatus}.png" width="60" height="60">`;
   var taskNameElement = btn.closest('.task').querySelector('.task-name');
-  taskNameElement.classList.replace(oldStatus, nextStatus);
+  taskNameElement.classList.remove('pending', 'completed', 'rework');
+  taskNameElement.classList.add(nextStatus);
 
   // 更新数据库
   updateTaskStatus(taskId, nextStatus, function(success) {

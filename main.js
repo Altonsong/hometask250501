@@ -46,15 +46,30 @@ function toggleStatus(btn) {
 // ✅ 删除任务
 function deleteTask(btn) {
   var taskId = btn.getAttribute("data-id");
-  var taskDiv = btn.parentNode.parentNode;
-
-  deleteTaskFromSupabase(taskId, function(success) {
-    if (success) {
-      taskDiv.parentNode.removeChild(taskDiv);
-    } else {
-      alert("Failed to delete task.");
+  var taskDiv = btn.closest('.task');
+  var status = taskDiv.querySelector('.status').getAttribute('data-status');
+  
+  if (status === 'completed') {
+    // 如果是已完成状态,直接删除
+    deleteTaskFromSupabase(taskId, function(success) {
+      if (success) {
+        taskDiv.parentNode.removeChild(taskDiv);
+      } else {
+        alert("Failed to delete task.");
+      }
+    });
+  } else {
+    // 如果是未完成状态,弹出确认框
+    if (confirm("This task is not completed yet. Are you sure you want to delete it?")) {
+      deleteTaskFromSupabase(taskId, function(success) {
+        if (success) {
+          taskDiv.parentNode.removeChild(taskDiv);
+        } else {
+          alert("Failed to delete task.");
+        }
+      });
     }
-  });
+  }
 }
 
 // ✅ 日期格式化

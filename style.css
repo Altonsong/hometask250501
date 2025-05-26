@@ -378,6 +378,13 @@ select:focus {
   border-radius: 12px;
 }
 
+/* 在屏幕宽度超过700px时隐藏添加物品区域 */
+@media (min-width: 701px) {
+  .add-item-section {
+    display: none;
+  }
+}
+
 .item-input {
   background: rgba(255, 255, 255, 0.1);
   border: none;

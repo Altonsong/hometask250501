@@ -369,3 +369,262 @@ select:focus {
   justify-content: center;
   align-items: center;
 }
+
+/* 冷冻物品管理样式 */
+.add-item-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.item-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.item-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.freezer-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.freezer-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.freezer-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.freezer-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.freezers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.freezer-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  min-height: 200px;
+}
+
+.freezer-box h3 {
+  margin: 0 0 15px 0;
+  color: #00FF00;
+  font-size: 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 10px;
+}
+
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-name {
+  color: white;
+  font-size: 14px;
+}
+
+.delete-item-btn {
+  background: rgba(255, 0, 0, 0.2);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  border-radius: 4px;
+  color: #ff6b6b;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-item-btn:hover {
+  background: rgba(255, 0, 0, 0.3);
+  border-color: rgba(255, 0, 0, 0.7);
+}
+
+/* 移动端响应式样式 */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 0 10px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  /* 任务列表移动端优化 */
+  .task {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 15px 0;
+  }
+  
+  .task-name {
+    font-size: 28px;
+  }
+  
+  .task-buttons {
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  /* 表单移动端优化 */
+  .add-task-form {
+    gap: 20px;
+    padding: 10px 0;
+  }
+  
+  .form-group label {
+    font-size: 22px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    font-size: 20px;
+    padding: 12px;
+    height: 50px;
+  }
+  
+  .select-trigger {
+    font-size: 20px;
+    height: 50px;
+    padding: 12px;
+  }
+  
+  .add-task-btn {
+    font-size: 24px;
+    height: 60px;
+    margin-top: 15px;
+  }
+  
+  /* 冷冻物品管理移动端优化 */
+  .freezers-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .freezer-buttons {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .freezer-btn {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .freezer-box {
+    padding: 12px;
+    min-height: 150px;
+  }
+  
+  .freezer-box h3 {
+    font-size: 18px;
+  }
+  
+  .item-input {
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+  
+  /* 登录页面移动端优化 */
+  .login-desc {
+    font-size: 20px;
+  }
+  
+  .login-subdesc {
+    font-size: 18px;
+  }
+  
+  .dial-button {
+    font-size: 8vw;
+    max-width: 80px;
+    max-height: 80px;
+  }
+  
+  /* 导航图标移动端优化 */
+  .nav-icon {
+    font-size: 60px;
+  }
+}
+
+/* 超小屏幕优化 (iPhone SE 等) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+  
+  .task-name {
+    font-size: 24px;
+  }
+  
+  .form-group label {
+    font-size: 18px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    font-size: 16px;
+  }
+  
+  .select-trigger {
+    font-size: 16px;
+  }
+  
+  .add-task-btn {
+    font-size: 20px;
+    height: 55px;
+  }
+  
+  .dial-button {
+    font-size: 10vw;
+    max-width: 70px;
+    max-height: 70px;
+  }
+  
+  .nav-icon {
+    font-size: 50px;
+  }
+}

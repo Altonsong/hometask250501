@@ -111,3 +111,58 @@ function updateTaskStatus(taskId, newStatus, callback) {
 
   xhr.send(JSON.stringify({ status: newStatus }));
 }
+
+// ✅ 获取所有冷冻物品
+function getFreezeItems(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", SUPABASE_URL + "/rest/v1/freeze_items?select=*", true);
+  xhr.setRequestHeader("apikey", API_KEY);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      var data = JSON.parse(xhr.responseText);
+      if (callback) callback(data);
+    } else {
+      alert("Failed to fetch freeze items. Status: " + xhr.status);
+      if (callback) callback([]);
+    }
+  };
+  xhr.send();
+}
+
+// ✅ 添加冷冻物品
+function addFreezeItem(item, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", SUPABASE_URL + "/rest/v1/freeze_items", true);
+  xhr.setRequestHeader("apikey", API_KEY);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Prefer", "return=representation");
+  xhr.onload = function () {
+    if (xhr.status === 201) {
+      if (callback) callback(true);
+    } else {
+      alert("Add freeze item failed: " + xhr.responseText);
+      if (callback) callback(false);
+    }
+  };
+  xhr.send(JSON.stringify(item));
+}
+
+// ✅ 删除冷冻物品
+function deleteFreezeItem(itemId, callback) {
+  var xhr = new XMLHttpRequest();
+  var url = SUPABASE_URL + "/rest/v1/freeze_items?id=eq." + encodeURIComponent(itemId);
+  xhr.open("DELETE", url, true);
+  xhr.setRequestHeader("apikey", API_KEY);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Prefer", "return=representation");
+  xhr.onload = function () {
+    if (xhr.status === 204 || xhr.status === 200) {
+      if (callback) callback(true);
+    } else {
+      alert("Delete freeze item failed. Status: " + xhr.status);
+      if (callback) callback(false);
+    }
+  };
+  xhr.send();
+}

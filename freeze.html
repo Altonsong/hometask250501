@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freeze Items - Home Task</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="nav">
+    <a href="index.html" class="nav-icon">
+      <img src="images/home.png" width="30" style="filter: brightness(0) invert(1);">
+    </a>
+  </div>
+
+  <div class="container">
+    <h1>Freeze Items</h1>
+    
+    <div class="connection-status">
+      <span class="status-dot"></span>
+      Database connected
+    </div>
+
+    <!-- 添加物品表单 -->
+    <div class="add-item-section">
+      <div class="form-group">
+        <input type="text" id="itemName" placeholder="Enter item name" class="item-input">
+      </div>
+      <div class="freezer-buttons">
+        <button class="freezer-btn" data-freezer="LG" onclick="addItem('LG')">Add to LG</button>
+        <button class="freezer-btn" data-freezer="Hisense" onclick="addItem('Hisense')">Add to Hisense</button>
+        <button class="freezer-btn" data-freezer="Danny" onclick="addItem('Danny')">Add to Danny</button>
+        <button class="freezer-btn" data-freezer="Cold Room" onclick="addItem('Cold Room')">Add to Cold Room</button>
+      </div>
+    </div>
+
+    <!-- 冷冻设备显示区域 -->
+    <div class="freezers-container">
+      <div class="freezer-box" data-freezer="LG">
+        <h3>LG</h3>
+        <div class="items-list" id="LG-items"></div>
+      </div>
+      
+      <div class="freezer-box" data-freezer="Hisense">
+        <h3>Hisense</h3>
+        <div class="items-list" id="Hisense-items"></div>
+      </div>
+      
+      <div class="freezer-box" data-freezer="Danny">
+        <h3>Danny</h3>
+        <div class="items-list" id="Danny-items"></div>
+      </div>
+      
+      <div class="freezer-box" data-freezer="Cold Room">
+        <h3>Cold Room</h3>
+        <div class="items-list" id="Cold Room-items"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="freeze.js"></script>
+</body>
+</html>

@@ -648,9 +648,25 @@ select:focus {
     font-size: 18px;
   }
   
+  .item-name {
+    font-size: 20px !important;
+  }
+  
   .item-input {
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px 12px;
+  }
+  
+  .quantity-label {
+    font-size: 20px;
+  }
+  
+  .quantity-input {
+    font-size: 20px;
+  }
+  
+  .freezer-btn {
+    font-size: 20px;
   }
   
   /* 登录页面移动端优化 */

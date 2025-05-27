@@ -8,7 +8,7 @@ window.onload = function () {
 };
 
 // 数量控制函数
-function changeQuantity(change) {
+window.changeQuantity = function(change) {
   var quantityInput = document.getElementById('quantity');
   var currentValue = parseInt(quantityInput.value) || 1;
   var newValue = currentValue + change;
@@ -19,7 +19,7 @@ function changeQuantity(change) {
 }
 
 // 添加物品到指定冷冻设备
-function addItem(freezerType) {
+window.addItem = function(freezerType) {
   var itemName = document.getElementById('itemName').value.trim();
   var quantity = parseInt(document.getElementById('quantity').value) || 1;
   
@@ -74,7 +74,7 @@ function addItem(freezerType) {
 }
 
 // 删除物品（数量递减）
-function deleteItem(itemId) {
+window.deleteItem = function(itemId) {
   getFreezeItems(function(items) {
     var item = items.find(function(i) { return i.id === itemId; });
     if (!item) {

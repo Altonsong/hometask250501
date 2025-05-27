@@ -556,7 +556,15 @@ select:focus {
 }
 
 /* 移动端响应式样式 */
-@media (max-width: 768px) {
+/* 确保700px以上始终显示两列 */
+@media (min-width: 701px) and (max-width: 768px) {
+  .freezers-container {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 700px) {
   body {
     padding: 10px;
   }
@@ -615,7 +623,7 @@ select:focus {
     margin-top: 15px;
   }
   
-  /* 冷冻物品管理移动端优化 */
+  /* 冷冻物品管理移动端优化 - 只在700px以下显示单列 */
   .freezers-container {
     grid-template-columns: 1fr;
     gap: 10px;

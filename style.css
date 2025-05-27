@@ -401,6 +401,62 @@ select:focus {
   color: rgba(255, 255, 255, 0.5);
 }
 
+.quantity-section {
+  margin-bottom: 15px;
+}
+
+.quantity-label {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.quantity-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.quantity-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.quantity-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 60px;
+  padding: 8px;
+}
+
+.quantity-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
 .freezer-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -473,12 +529,17 @@ select:focus {
 .delete-item-btn {
   background: rgba(255, 0, 0, 0.2);
   border: 1px solid rgba(255, 0, 0, 0.5);
-  border-radius: 4px;
+  border-radius: 50%;
   color: #ff6b6b;
-  padding: 4px 8px;
-  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete-item-btn:hover {

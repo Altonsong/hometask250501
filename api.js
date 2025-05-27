@@ -148,6 +148,25 @@ function addFreezeItem(item, callback) {
   xhr.send(JSON.stringify(item));
 }
 
+// ✅ 更新冷冻物品数量
+function updateFreezeItemQuantity(itemId, newQuantity, callback) {
+  var xhr = new XMLHttpRequest();
+  var url = SUPABASE_URL + "/rest/v1/freeze_items?id=eq." + encodeURIComponent(itemId);
+  xhr.open("PATCH", url, true);
+  xhr.setRequestHeader("apikey", API_KEY);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.setRequestHeader("Prefer", "return=minimal");
+  xhr.onload = function () {
+    if (xhr.status === 204 || xhr.status === 200) {
+      if (callback) callback(true);
+    } else {
+      alert("Update freeze item quantity failed. Status: " + xhr.status);
+      if (callback) callback(false);
+    }
+  };
+  xhr.send(JSON.stringify({ quantity: newQuantity }));
+}
+
 // ✅ 删除冷冻物品
 function deleteFreezeItem(itemId, callback) {
   var xhr = new XMLHttpRequest();

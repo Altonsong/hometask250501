@@ -1,4 +1,5 @@
 
+
 // 页面加载时获取所有冷冻物品
 window.onload = function () {
   getFreezeItems(function (items) {
@@ -6,47 +7,112 @@ window.onload = function () {
   });
 };
 
+// 数量控制函数
+function changeQuantity(change) {
+  var quantityInput = document.getElementById('quantity');
+  var currentValue = parseInt(quantityInput.value) || 1;
+  var newValue = currentValue + change;
+  
+  if (newValue >= 1 && newValue <= 99) {
+    quantityInput.value = newValue;
+  }
+}
+
 // 添加物品到指定冷冻设备
 function addItem(freezerType) {
   var itemName = document.getElementById('itemName').value.trim();
+  var quantity = parseInt(document.getElementById('quantity').value) || 1;
   
   if (!itemName) {
     alert('Please enter an item name');
     return;
   }
 
-  var item = {
-    item_name: itemName,
-    freezer_type: freezerType
-  };
+  // 检查是否已存在相同名称和冷冻设备的物品
+  getFreezeItems(function(existingItems) {
+    var existingItem = existingItems.find(function(item) {
+      return item.item_name === itemName && item.freezer_type === freezerType;
+    });
 
-  addFreezeItem(item, function(success) {
-    if (success) {
-      document.getElementById('itemName').value = '';
-      // 重新加载数据
-      getFreezeItems(function (items) {
-        displayItems(items);
+    if (existingItem) {
+      // 如果物品已存在，更新数量
+      var newQuantity = (existingItem.quantity || 1) + quantity;
+      updateFreezeItemQuantity(existingItem.id, newQuantity, function(success) {
+        if (success) {
+          document.getElementById('itemName').value = '';
+          document.getElementById('quantity').value = '1';
+          // 重新加载数据
+          getFreezeItems(function (items) {
+            displayItems(items);
+          });
+        } else {
+          alert('Failed to update item quantity');
+        }
       });
     } else {
-      alert('Failed to add item');
+      // 如果物品不存在，添加新物品
+      var item = {
+        item_name: itemName,
+        freezer_type: freezerType,
+        quantity: quantity
+      };
+
+      addFreezeItem(item, function(success) {
+        if (success) {
+          document.getElementById('itemName').value = '';
+          document.getElementById('quantity').value = '1';
+          // 重新加载数据
+          getFreezeItems(function (items) {
+            displayItems(items);
+          });
+        } else {
+          alert('Failed to add item');
+        }
+      });
     }
   });
 }
 
-// 删除物品
+// 删除物品（数量递减）
 function deleteItem(itemId) {
-  if (confirm('Are you sure you want to remove this item?')) {
-    deleteFreezeItem(itemId, function(success) {
-      if (success) {
-        // 重新加载数据
-        getFreezeItems(function (items) {
-          displayItems(items);
+  getFreezeItems(function(items) {
+    var item = items.find(function(i) { return i.id === itemId; });
+    if (!item) {
+      alert('Item not found');
+      return;
+    }
+
+    var currentQuantity = item.quantity || 1;
+    
+    if (currentQuantity > 1) {
+      // 如果数量大于1，减少数量
+      var newQuantity = currentQuantity - 1;
+      updateFreezeItemQuantity(itemId, newQuantity, function(success) {
+        if (success) {
+          // 重新加载数据
+          getFreezeItems(function (items) {
+            displayItems(items);
+          });
+        } else {
+          alert('Failed to update item quantity');
+        }
+      });
+    } else {
+      // 如果数量为1，确认删除整个物品
+      if (confirm('This will completely remove "' + item.item_name + '" from ' + item.freezer_type + '. Are you sure?')) {
+        deleteFreezeItem(itemId, function(success) {
+          if (success) {
+            // 重新加载数据
+            getFreezeItems(function (items) {
+              displayItems(items);
+            });
+          } else {
+            alert('Failed to delete item');
+          }
         });
-      } else {
-        alert('Failed to delete item');
       }
-    });
-  }
+    }
+  });
 }
 
 // 显示物品到各个冷冻设备框中
@@ -63,10 +129,16 @@ function displayItems(items) {
     if (container) {
       var itemElement = document.createElement('div');
       itemElement.className = 'item';
+      
+      // 格式化显示：物品名称 (x份数)
+      var quantity = item.quantity || 1;
+      var displayText = item.item_name + ' (' + quantity + '份)';
+      
       itemElement.innerHTML = 
-        '<span class="item-name">' + item.item_name + '</span>' +
-        '<button class="delete-item-btn" onclick="deleteItem(' + item.id + ')">×</button>';
+        '<span class="item-name">' + displayText + '</span>' +
+        '<button class="delete-item-btn" onclick="deleteItem(' + item.id + ')">-</button>';
       container.appendChild(itemElement);
     }
   });
 }
+

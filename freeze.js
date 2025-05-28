@@ -155,9 +155,9 @@ function displayItems(items) {
       var itemElement = document.createElement('div');
       itemElement.className = 'item';
       
-      // 格式化显示：物品名称 (x份数)
+      // 格式化显示：物品名称 (数量)
       var quantity = item.quantity || 1;
-      var displayText = item.item_name + ' (' + quantity + '份)';
+      var displayText = item.item_name + ' (' + quantity + ')';
       
       itemElement.innerHTML = 
         '<span class="item-name">' + displayText + '</span>' +

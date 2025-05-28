@@ -1,5 +1,4 @@
 
-
 // 页面加载时获取所有冷冻物品
 window.onload = function () {
   getFreezeItems(function (items) {
@@ -41,10 +40,8 @@ window.addItem = function(freezerType) {
         if (success) {
           document.getElementById('itemName').value = '';
           document.getElementById('quantity').value = '1';
-          // 重新加载数据
-          getFreezeItems(function (items) {
-            displayItems(items);
-          });
+          // 局部更新显示
+          updateItemDisplay(existingItem.id, newQuantity);
         } else {
           alert('Failed to update item quantity');
         }
@@ -61,7 +58,7 @@ window.addItem = function(freezerType) {
         if (success) {
           document.getElementById('itemName').value = '';
           document.getElementById('quantity').value = '1';
-          // 重新加载数据
+          // 重新加载数据（新增物品需要重新排序）
           getFreezeItems(function (items) {
             displayItems(items);
           });
@@ -87,10 +84,8 @@ window.increaseItem = function(itemId) {
     
     updateFreezeItemQuantity(itemId, newQuantity, function(success) {
       if (success) {
-        // 重新加载数据
-        getFreezeItems(function (items) {
-          displayItems(items);
-        });
+        // 局部更新显示
+        updateItemDisplay(itemId, newQuantity);
       } else {
         alert('Failed to update item quantity');
       }
@@ -114,10 +109,8 @@ window.deleteItem = function(itemId) {
       var newQuantity = currentQuantity - 1;
       updateFreezeItemQuantity(itemId, newQuantity, function(success) {
         if (success) {
-          // 重新加载数据
-          getFreezeItems(function (items) {
-            displayItems(items);
-          });
+          // 局部更新显示
+          updateItemDisplay(itemId, newQuantity);
         } else {
           alert('Failed to update item quantity');
         }
@@ -127,10 +120,8 @@ window.deleteItem = function(itemId) {
       if (confirm('This will completely remove "' + item.item_name + '" from ' + item.freezer_type + '. Are you sure?')) {
         deleteFreezeItem(itemId, function(success) {
           if (success) {
-            // 重新加载数据
-            getFreezeItems(function (items) {
-              displayItems(items);
-            });
+            // 删除DOM元素
+            removeItemFromDisplay(itemId);
           } else {
             alert('Failed to delete item');
           }
@@ -138,6 +129,29 @@ window.deleteItem = function(itemId) {
       }
     }
   });
+}
+
+// 局部更新item显示
+function updateItemDisplay(itemId, newQuantity) {
+  var itemElement = document.querySelector('[data-item-id="' + itemId + '"]');
+  if (itemElement) {
+    var itemNameSpan = itemElement.querySelector('.item-name');
+    if (itemNameSpan) {
+      var currentText = itemNameSpan.textContent;
+      // 提取物品名称（去掉括号和数量部分）
+      var itemName = currentText.replace(/\s*\(\d+\)$/, '');
+      // 更新显示文本
+      itemNameSpan.textContent = itemName + ' (' + newQuantity + ')';
+    }
+  }
+}
+
+// 从显示中移除item
+function removeItemFromDisplay(itemId) {
+  var itemElement = document.querySelector('[data-item-id="' + itemId + '"]');
+  if (itemElement) {
+    itemElement.remove();
+  }
 }
 
 // 显示物品到各个冷冻设备框中
@@ -154,6 +168,7 @@ function displayItems(items) {
     if (container) {
       var itemElement = document.createElement('div');
       itemElement.className = 'item';
+      itemElement.setAttribute('data-item-id', item.id);
       
       // 格式化显示：物品名称 (数量)
       var quantity = item.quantity || 1;
@@ -169,4 +184,3 @@ function displayItems(items) {
     }
   });
 }
-

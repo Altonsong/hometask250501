@@ -1,4 +1,3 @@
-
 // 页面加载时获取所有冷冻物品
 window.onload = function () {
   getFreezeItems(function (items) {
@@ -11,7 +10,7 @@ window.changeQuantity = function(change) {
   var quantityInput = document.getElementById('quantity');
   var currentValue = parseInt(quantityInput.value) || 1;
   var newValue = currentValue + change;
-  
+
   if (newValue >= 1 && newValue <= 99) {
     quantityInput.value = newValue;
   }
@@ -21,7 +20,7 @@ window.changeQuantity = function(change) {
 window.addItem = function(freezerType) {
   var itemName = document.getElementById('itemName').value.trim();
   var quantity = parseInt(document.getElementById('quantity').value) || 1;
-  
+
   if (!itemName) {
     alert('Please enter an item name');
     return;
@@ -81,7 +80,7 @@ window.increaseItem = function(itemId) {
 
     var currentQuantity = item.quantity || 1;
     var newQuantity = currentQuantity + 1;
-    
+
     updateFreezeItemQuantity(itemId, newQuantity, function(success) {
       if (success) {
         // 局部更新显示
@@ -103,7 +102,7 @@ window.deleteItem = function(itemId) {
     }
 
     var currentQuantity = item.quantity || 1;
-    
+
     if (currentQuantity > 1) {
       // 如果数量大于1，减少数量
       var newQuantity = currentQuantity - 1;
@@ -169,11 +168,11 @@ function displayItems(items) {
       var itemElement = document.createElement('div');
       itemElement.className = 'item';
       itemElement.setAttribute('data-item-id', item.id);
-      
+
       // 格式化显示：物品名称 (数量)
       var quantity = item.quantity || 1;
       var displayText = item.item_name + ' (' + quantity + ')';
-      
+
       itemElement.innerHTML = 
         '<span class="item-name">' + displayText + '</span>' +
         '<div class="item-buttons">' +
@@ -183,4 +182,9 @@ function displayItems(items) {
       container.appendChild(itemElement);
     }
   });
+
+  // 重新布局瀑布流
+  if (typeof refreshMasonryLayout === 'function') {
+    refreshMasonryLayout();
+  }
 }

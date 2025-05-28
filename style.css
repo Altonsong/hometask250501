@@ -484,21 +484,20 @@ select:focus {
 }
 
 .freezers-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  grid-auto-rows: min-content;
-  align-items: start;
+  position: relative;
+  width: 100%;
 }
 
 .freezer-box {
-  /* 移除flex相关属性，让grid处理布局 */
+  position: absolute;
+  width: calc(50% - 7.5px);
+  box-sizing: border-box;
 }
 
 /* 当屏幕宽度超过700px时，保持两列布局 */
 @media (min-width: 701px) {
-  .freezers-container {
-    gap: 20px;
+  .freezer-box {
+    width: calc(50% - 10px);
   }
 }
 

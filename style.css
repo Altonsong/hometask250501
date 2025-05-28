@@ -534,6 +534,28 @@ select:focus {
   font-size: 26px;
 }
 
+.add-item-btn {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid rgba(0, 255, 0, 0.5);
+  border-radius: 50%;
+  color: #00FF00;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.add-item-btn:hover {
+  background: rgba(0, 255, 0, 0.3);
+  border-color: rgba(0, 255, 0, 0.7);
+}
+
 .delete-item-btn {
   background: rgba(255, 0, 0, 0.2);
   border: 1px solid rgba(255, 0, 0, 0.5);
@@ -553,6 +575,11 @@ select:focus {
 .delete-item-btn:hover {
   background: rgba(255, 0, 0, 0.3);
   border-color: rgba(255, 0, 0, 0.7);
+}
+
+.item-buttons {
+  display: flex;
+  align-items: center;
 }
 
 /* 移动端响应式样式 */

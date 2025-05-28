@@ -73,6 +73,31 @@ window.addItem = function(freezerType) {
   });
 }
 
+// 增加物品数量
+window.increaseItem = function(itemId) {
+  getFreezeItems(function(items) {
+    var item = items.find(function(i) { return i.id === itemId; });
+    if (!item) {
+      alert('Item not found');
+      return;
+    }
+
+    var currentQuantity = item.quantity || 1;
+    var newQuantity = currentQuantity + 1;
+    
+    updateFreezeItemQuantity(itemId, newQuantity, function(success) {
+      if (success) {
+        // 重新加载数据
+        getFreezeItems(function (items) {
+          displayItems(items);
+        });
+      } else {
+        alert('Failed to update item quantity');
+      }
+    });
+  });
+}
+
 // 删除物品（数量递减）
 window.deleteItem = function(itemId) {
   getFreezeItems(function(items) {
@@ -136,7 +161,10 @@ function displayItems(items) {
       
       itemElement.innerHTML = 
         '<span class="item-name">' + displayText + '</span>' +
-        '<button class="delete-item-btn" onclick="deleteItem(' + item.id + ')">-</button>';
+        '<div class="item-buttons">' +
+          '<button class="add-item-btn" onclick="increaseItem(' + item.id + ')">+</button>' +
+          '<button class="delete-item-btn" onclick="deleteItem(' + item.id + ')">-</button>' +
+        '</div>';
       container.appendChild(itemElement);
     }
   });

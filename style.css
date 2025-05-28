@@ -491,8 +491,9 @@ select:focus {
 }
 
 .freezer-box {
-  flex: 1 1 calc(50% - 7.5px);
+  flex: 0 1 calc(50% - 7.5px);
   min-width: 0;
+  max-width: calc(50% - 7.5px);
 }
 
 /* 当屏幕宽度超过700px时，保持两列布局 */
@@ -502,7 +503,8 @@ select:focus {
   }
   
   .freezer-box {
-    flex: 1 1 calc(50% - 10px);
+    flex: 0 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
   }
 }
 

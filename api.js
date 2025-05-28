@@ -115,7 +115,7 @@ function updateTaskStatus(taskId, newStatus, callback) {
 // ✅ 获取所有冷冻物品
 function getFreezeItems(callback) {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", SUPABASE_URL + "/rest/v1/freeze_items?select=*&order=created_at.asc", true);
+  xhr.open("GET", SUPABASE_URL + "/rest/v1/freeze_items?select=*&order=created_at", true);
   xhr.setRequestHeader("apikey", API_KEY);
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onload = function () {

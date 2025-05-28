@@ -486,6 +486,8 @@ select:focus {
 .freezers-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: min-content;
+  align-items: start;
   gap: 15px;
 }
 
@@ -493,6 +495,8 @@ select:focus {
 @media (min-width: 701px) {
   .freezers-container {
     grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    align-items: start;
     gap: 20px;
   }
 }
@@ -502,7 +506,7 @@ select:focus {
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 15px;
-  min-height: 200px;
+  /* 移除固定的 min-height，让容器根据内容自适应高度 */
 }
 
 .freezer-box h3 {

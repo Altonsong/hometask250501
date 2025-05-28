@@ -484,27 +484,21 @@ select:focus {
 }
 
 .freezers-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 15px;
+  grid-auto-rows: min-content;
+  align-items: start;
 }
 
 .freezer-box {
-  flex: 0 1 calc(50% - 7.5px);
-  min-width: 0;
-  max-width: calc(50% - 7.5px);
+  /* 移除flex相关属性，让grid处理布局 */
 }
 
 /* 当屏幕宽度超过700px时，保持两列布局 */
 @media (min-width: 701px) {
   .freezers-container {
     gap: 20px;
-  }
-  
-  .freezer-box {
-    flex: 0 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
   }
 }
 

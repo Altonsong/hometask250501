@@ -580,6 +580,7 @@ select:focus {
 .item-buttons {
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 /* 移动端响应式样式 */
